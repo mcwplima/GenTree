@@ -1,0 +1,180 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 10.16
+-- Dumped by pg_dump version 10.16
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: persons; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.persons (
+    objectid character varying NOT NULL,
+    name character varying NOT NULL
+);
+
+
+ALTER TABLE public.persons OWNER TO postgres;
+
+--
+-- Name: relations; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.relations (
+    objectid character varying NOT NULL,
+    child_objectid character varying NOT NULL,
+    parent_objectid character varying
+);
+
+
+ALTER TABLE public.relations OWNER TO postgres;
+
+--
+-- Name: test; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.test (
+    id integer,
+    parent integer
+);
+
+
+ALTER TABLE public.test OWNER TO postgres;
+
+--
+-- Data for Name: persons; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.persons (objectid, name) FROM stdin;
+casgqk3e9ur8ei2vo4i0	Sonny
+casgqm3e9ur8ei2vo4ig	Martin
+casgqoje9ur8ei2vo4j0	Anastasia
+casgqqje9ur8ei2vo4jg	Ellen
+casgqsje9ur8ei2vo4k0	Oprah
+casgqu3e9ur8ei2vo4kg	Mike
+casgqvbe9ur8ei2vo4l0	Phoebe
+casgr1je9ur8ei2vo4lg	Ursula
+casgr2re9ur8ei2vo4m0	Eric
+casgr43e9ur8ei2vo4mg	Ariel
+casgr5je9ur8ei2vo4n0	Dunny
+casgr6re9ur8ei2vo4ng	Bruce
+casgr9je9ur8ei2vo4o0	Jacqueline
+casgrbre9ur8ei2vo4og	Melody
+\.
+
+
+--
+-- Data for Name: relations; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.relations (objectid, child_objectid, parent_objectid) FROM stdin;
+cash0h3e9ur4ih7u5ipg	casgr5je9ur8ei2vo4n0	casgqu3e9ur8ei2vo4kg
+cash0kje9ur4ih7u5iq0	casgr5je9ur8ei2vo4n0	casgqvbe9ur8ei2vo4l0
+cash1bre9ur4ih7u5iqg	casgr6re9ur8ei2vo4ng	casgqu3e9ur8ei2vo4kg
+cash1fbe9ur4ih7u5ir0	casgr6re9ur8ei2vo4ng	casgqvbe9ur8ei2vo4l0
+cash1oje9ur4ih7u5irg	casgr9je9ur8ei2vo4o0	casgr1je9ur8ei2vo4lg
+cash1s3e9ur4ih7u5is0	casgr9je9ur8ei2vo4o0	casgr2re9ur8ei2vo4m0
+cash25be9ur4ih7u5isg	casgrbre9ur8ei2vo4og	casgr2re9ur8ei2vo4m0
+cash28je9ur4ih7u5it0	casgrbre9ur8ei2vo4og	casgr43e9ur8ei2vo4mg
+cash2fje9ur4ih7u5itg	casgr2re9ur8ei2vo4m0	casgqqje9ur8ei2vo4jg
+cash2jje9ur4ih7u5iu0	casgr2re9ur8ei2vo4m0	casgqsje9ur8ei2vo4k0
+cash2tbe9ur4ih7u5iug	casgr1je9ur8ei2vo4lg	casgqoje9ur8ei2vo4j0
+cash32je9ur4ih7u5iv0	casgr1je9ur8ei2vo4lg	casgqm3e9ur8ei2vo4ig
+cash3d3e9ur4ih7u5ivg	casgqvbe9ur8ei2vo4l0	casgqoje9ur8ei2vo4j0
+cash3gre9ur4ih7u5j00	casgqvbe9ur8ei2vo4l0	casgqm3e9ur8ei2vo4ig
+cash3n3e9ur4ih7u5j0g	casgqu3e9ur8ei2vo4kg	casgqk3e9ur8ei2vo4i0
+casosbre9ur4mv29q8cg	casgqk3e9ur8ei2vo4i0	\N
+casosi3e9ur4mv29q8d0	casgqm3e9ur8ei2vo4ig	\N
+casosqje9ur4mv29q8dg	casgqoje9ur8ei2vo4j0	\N
+casot23e9ur4mv29q8e0	casgqqje9ur8ei2vo4jg	\N
+casot5je9ur4mv29q8eg	casgqsje9ur8ei2vo4k0	\N
+casotbre9ur4mv29q8f0	casgr43e9ur8ei2vo4mg	\N
+\.
+
+
+--
+-- Data for Name: test; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.test (id, parent) FROM stdin;
+1	\N
+2	1
+3	1
+4	\N
+5	4
+6	4
+7	2
+8	3
+9	5
+10	5
+11	8
+12	8
+\.
+
+
+--
+-- Name: persons persons_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.persons
+    ADD CONSTRAINT persons_pkey PRIMARY KEY (objectid);
+
+
+--
+-- Name: relations relations_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.relations
+    ADD CONSTRAINT relations_pkey PRIMARY KEY (objectid);
+
+
+--
+-- Name: relations fk_child; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.relations
+    ADD CONSTRAINT fk_child FOREIGN KEY (child_objectid) REFERENCES public.persons(objectid);
+
+
+--
+-- Name: relations fk_parent; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.relations
+    ADD CONSTRAINT fk_parent FOREIGN KEY (parent_objectid) REFERENCES public.persons(objectid);
+
+
+--
+-- PostgreSQL database dump complete
+--
+
