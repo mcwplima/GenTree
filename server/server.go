@@ -21,7 +21,7 @@ func Start(context context.Context) {
 
 	router := router.Routes()
 
-	locallog.Println(fmt.Sprintf("Starting Prediza Web Service on port %d", config.Core.Port))
+	locallog.Println(fmt.Sprintf("Starting Web Service on port %d", config.Core.Port))
 
 	err := http.ListenAndServe(fmt.Sprintf(":%d", config.Core.Port), middleware.WrapHandler(context, router))
 	if err != nil {

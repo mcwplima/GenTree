@@ -1,0 +1,46 @@
+[Banco de Dados]
+O arquivo do banco de dados está localizado na pasta db
+
+username - genws
+password - genws
+
+[WS]
+
+Uma pessoa é representada pela estrutura
+
+type Person struct {
+	ObjectID string  `json:"objectid"`
+	Name     *string `json:"name"`
+}
+
+A relação entre duas pessoas é representada pela estrutura
+
+type Relation struct {
+	ObjectID string  `json:"objectid"`
+	Child    *string `json:"child"`
+	Parent   *string `json:"parent"`
+}
+
+Child é o objectid da filiação
+Parent é o objectid do parentesco
+
+A árvore é representada pela estrutura
+
+type PersonTree struct {
+	ObjectID  string    `json:"objectid"`
+	Name      *string   `json:"name"`
+	Relations []*Person `json:"relations"`
+}
+
+
+O endpoint "/api/person/"             GET     Lista todas pessoas cadastradas no banco
+O endpoint "/api/person/{objectid}"   DELETE  Deleta uma pessoa através do seu objectid
+O endpoint "/api/person/{objectid}"   GET     Busca uma pessoa através de seu objectid 
+O endpoint "/api/person/{objectid}"   PUT     Altera o nome de uma pessoa passando seu objectid
+O endpoint "/api/person/"             POST    Cria uma pessoa através do seu nome
+O endpoint "/api/relation/"           POST    Cria uma relação entre duas pessoas passando os objects ids do pai e o fiçho
+O endpoint "/api/relation/{objectid}"       DELETE  Deleta uma relação através do seu objectid
+O endpoint "/api/relation/{objectid}"       GET     Busca uma relação através de seu objectid 
+O endpoint "/api/relation/{objectid}"       PUT     Altera uma relação
+O endpoint "/api/relation/"           GET     Lista todas relações existentes
+O endpoint "/api/tree/{objectid}"           GET     Busca a árvore de uma pessoa
